@@ -11,6 +11,8 @@ contains() {
 
 envOutput=
 
+nix develop "${arguments[@]}" --command bash -c "echo -ne '\0'; env -0"
+
 # Iterate over the output of `env -0`
 # On the last loop, exit with the last value read, which will be the exit
 # status of `nix develop`.
