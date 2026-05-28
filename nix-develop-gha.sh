@@ -23,6 +23,10 @@ while IFS='=' read -r -d '' n v || exit "$n"; do
 		envOutput=1
 		if [ "$v" ]; then
 			# There was one or more equals signs in the hook output
+			if [[ "$n" =~ ^[[:space:]]*$ ]]; then
+				# We got a variable that was just spaces, which is unlikely to be intentional, so skip it.
+				continue
+			fi
 			printf "%s=%s" "$n" "$v"
 		else
 			printf "%s" "$n"
